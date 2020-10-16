@@ -56,12 +56,12 @@ parts:
     - libx11-xcb1
     - libxss1
     - libxtst6
-    build-packages:
-    - nodejs
-    - npm
-    - unzip
     build-snaps:
     - node/12/stable
+    build-packages:
+    # - nodejs
+    - npm
+    - unzip
 
   # Adapted from snapcraft-desktop-helpers https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml#L183
   desktop-gtk3:

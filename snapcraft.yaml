@@ -2,7 +2,7 @@ name: kima-electron-demo
 version: 0.1
 summary: Hello World app using Electron in Kiosk mode
 description: Hello World app using Electron in Kiosk mode
-base: core20
+# base: core18
 confinement: strict
 grade: devel
 

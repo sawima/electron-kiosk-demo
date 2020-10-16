@@ -1,13 +1,12 @@
-name: kima-electron-demo
+name: electron-hello-world-kiosk
 version: 0.1
 summary: Hello World app using Electron in Kiosk mode
 description: Hello World app using Electron in Kiosk mode
-base: core20
 confinement: strict
 grade: devel
 
 apps:
-  kima-electron-demo:
+  electron-hello-world-kiosk:
     command: desktop-launch xwayland-kiosk-launch "$SNAP/electron-helloworld/electron-quick-start"
     environment:
       XWAYLAND_FULLSCREEN_WINDOW_HINT: window_role="browser-window"

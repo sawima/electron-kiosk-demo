@@ -33,7 +33,9 @@ plugs:
 
 parts:
   electron-helloworld:
-    plugin: nil
+    plugin: nodejs
+    nodejs-version: 14.14.0
+    nodejs-package-manager: npm
     source: https://github.com/electron/electron-quick-start.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
@@ -54,9 +56,8 @@ parts:
     - libx11-xcb1
     - libxss1
     - libxtst6
-    build-snaps:
-    - node/12/stable
     build-packages:
+    - nodejs
     - npm
     - unzip
 

@@ -3,9 +3,13 @@ version: '0.1'
 summary: Hello World Electron app for a Kiosk
 description: |
   Simple Hello World Electron app as an example of a HTML5 Kiosk
-base: core20
+base: core18
 confinement: strict
 grade: devel
+
+architectures:
+  - build-on: arm64
+  - build-on: amd64
 
 apps:
   kima-electron-demo:
@@ -33,10 +37,11 @@ plugs:
 
 parts:
   electron-helloworld:
-    plugin: npm
-    npm-node-version: 14.14.0
+    plugin: nodejs
+    nodejs-version: "14.8.0"
+    nodejs-package-manager: npm
     source: https://github.com/electron/electron-quick-start.git
-    after: [desktop-gtk3, xwayland-kiosk-helper]
+    after: [desktop-gtk3, xwayland-kiosk-helper, node]
     override-build: |
         case $SNAPCRAFT_ARCH_TRIPLET in
           "i386-linux-gnu") ARCH="ia32";;
@@ -45,6 +50,10 @@ parts:
           "aarch64-linux-gnu") ARCH="arm64";;
           *) echo "ERROR: electron does not support the '$SNAPCRAFT_ARCH_TRIPLET' architecture" && exit 1;;
         esac
+        curl -s https://nodejs.org/dist/v14.8.0/node-v14.8.0-linux-$ARCH.tar.gz | tar xzf - -C "$SNAPCRAFT_PART_INSTALL" --strip-components=1
+        npm install
+        npm run build
+        npm install -g --prefix "${SNAPCRAFT_PART_INSTALL}" $(npm pack . | tail -1)
         npm install electron-packager &&
         ./node_modules/.bin/electron-packager . --overwrite --platform=linux --arch=$ARCH --output=release-build --prune=true
         cp -v -R ./electron-quick-start-linux-$ARCH $SNAPCRAFT_PART_INSTALL/electron-helloworld
@@ -55,10 +64,14 @@ parts:
     - libx11-xcb1
     - libxss1
     - libxtst6
-    # build-packages:
-    # - nodejs
-    # - npm
-    # - unzip
+    build-packages:
+    - nodejs
+    - npm
+    - unzip
+  
+  # node:
+  #   plugin: dump
+  #   source: https://nodejs.org/dist/v12.18.4/node-v12.18.4-linux-x64.tar.xz
 
   # Adapted from snapcraft-desktop-helpers https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml#L183
   desktop-gtk3:

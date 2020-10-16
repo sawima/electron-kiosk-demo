@@ -3,7 +3,7 @@ version: '0.1'
 summary: Hello World Electron app for a Kiosk
 description: |
   Simple Hello World Electron app as an example of a HTML5 Kiosk
-base: core18
+base: core20
 confinement: strict
 grade: devel
 
@@ -33,9 +33,8 @@ plugs:
 
 parts:
   electron-helloworld:
-    plugin: nodejs
-    nodejs-version: "14.14.0"
-    nodejs-package-manager: npm
+    plugin: npm
+    npm-node-version: 14.14.0
     source: https://github.com/electron/electron-quick-start.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |

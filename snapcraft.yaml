@@ -38,7 +38,7 @@ plugs:
 parts:
   electron-helloworld:
     plugin: nodejs
-    nodejs-version: "14.8.0"
+    # nodejs-version: "14.8.0"
     source: https://github.com/electron/electron-quick-start.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |

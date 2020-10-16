@@ -33,7 +33,7 @@ plugs:
 
 parts:
   electron-helloworld:
-    plugin: nodejs
+    # plugin: nodejs
     source: https://github.com/electron/electron-quick-start.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
@@ -54,11 +54,11 @@ parts:
     - libx11-xcb1
     - libxss1
     - libxtst6
-    # build-snaps:
-    # - node/12/stable
-    # build-packages:
-    # - npm
-    # - unzip
+    build-snaps:
+    - node/12/stable
+    build-packages:
+    - npm
+    - unzip
 
   # Adapted from snapcraft-desktop-helpers https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml#L183
   desktop-gtk3:

@@ -33,7 +33,7 @@ plugs:
 
 parts:
   electron-helloworld:
-    # plugin: nodejs
+    plugin: nil
     source: https://github.com/electron/electron-quick-start.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
